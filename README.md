@@ -1,6 +1,14 @@
 # Customer
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.0.5.
+Customer CRUD operation.
+
+Sample project running Angular 7 with Node.js backend.
+
+## Prerequisites
+
+* Install Node
+* Install CLI
+* Run custAPI on 'http://localhost:3000'
 
 ## Development server
 
