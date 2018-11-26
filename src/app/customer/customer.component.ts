@@ -24,4 +24,9 @@ export class CustomerComponent implements OnInit {
     this.customerService.getCustomers().subscribe(customers => this.customers = customers);
   }
 
+  delete(customer: Customer): void {
+    this.customerService.deleteCustomer(customer._id).subscribe();
+    this.customers = this.customers.filter(c => c !== customer);
+  }
+
 }

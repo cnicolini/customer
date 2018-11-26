@@ -24,17 +24,25 @@ export class CustomerService {
   getCustomers(): Observable<Customer[]> {
     // this.messageService.addMessage("Customers retrieved");
     // return of(CUSTOMERS);
-    return this.http.get<Customer[]>(this.customerUrl, {responseType: 'json'})
-      .pipe(
+    return this.http.get<Customer[]>(this.customerUrl, {responseType: 'json'}).pipe(
         catchError(this.handleError('getCustomers', []))
-      );
+    );
   }
 
   getCustomer(id: string): Observable<Customer> {
     const url = `${this.customerUrl}/${id}`;
-    return this.http.get<Customer>(url, {responseType: 'json'})
-      .pipe(
+    return this.http.get<Customer>(url, {responseType: 'json'}).pipe(
         catchError(this.handleError<Customer>(`getCustomer id=${id}`))
+    );
+  }
+
+  addCustomer(customer: Customer): Observable<Customer> {
+      if (!customer) {
+        this.log("addCustomer: customer is required");
+        return;
+      }
+      return this.http.post(url, customer, httpOptions).pipe(
+        catchError(this.handleError<Customer>('addCustomer'))
       );
   }
 
@@ -44,10 +52,20 @@ export class CustomerService {
       return;
     }
     const url = `${this.customerUrl}/${customer._id}`;
-    return this.http.put(url, customer, httpOptions).
-      pipe(
+    return this.http.put(url, customer, httpOptions).pipe(
         catchError(this.handleError<any>('updateCustomer'))
-      )
+    );
+  }
+
+  deleteCustomer(id: string): Observable<Customer> {
+    if (!id) {
+      this.log("deleteCustomer: id is required");
+      return;
+    }
+    const url = `${this.customerUrl}/${id}`;
+    return this.http.delete(url, httpOptions).pipe(
+        catchError(this.handleError<Customer>('deleteCustomer'))
+    );
   }
 
   /** Log a HeroService message with the MessageService */

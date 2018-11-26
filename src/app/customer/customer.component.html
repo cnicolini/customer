@@ -5,5 +5,13 @@
       <span class="badge">{{ i + 1 }}</span>
       <span id="{{'customer-name-' + customer._id}}" class="customerName">{{customer.name}}</span>
     </a>
+    <button class="delete" title="delete customer" (click)="delete(customer)">x</button>
   </li>
 </ul>
+<table>
+  <tr>
+    <td><a routerLink="/customer/add">Add customer</a></td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+</table>
