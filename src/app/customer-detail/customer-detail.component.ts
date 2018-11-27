@@ -4,7 +4,7 @@ import { Location } from '@angular/common';
 
 import { CustomerService } from '../customer.service';
 import { Customer } from '../customer';
-
+import { MessageService } from '../message.service';
 @Component({
   selector: 'app-customer-detail',
   templateUrl: './customer-detail.component.html',
@@ -17,7 +17,8 @@ export class CustomerDetailComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private location: Location,
-    private customerService: CustomerService
+    private customerService: CustomerService,
+    private messageService: MessageService
   ) { }
 
   ngOnInit() {
@@ -27,13 +28,24 @@ export class CustomerDetailComponent implements OnInit {
   getCustomer(): void {
     const id = this.route.snapshot.paramMap.get('id');
 
-    this.customerService.getCustomer(id)
-      .subscribe(customer => this.customer = customer);
+    if (id === 'add') {
+      this.customer = new Customer();
+    }
+    else {
+      this.customerService.getCustomer(id)
+        .subscribe(customer => this.customer = customer);
+    }
   }
 
   save(): void {
-    this.customerService.updateCustomer(this.customer)
-      .subscribe(() => this.goBack());
+    if (this.customer._id) {
+      this.customerService.updateCustomer(this.customer)
+        .subscribe(() => this.goBack());
+    }
+    else {
+      this.customerService.addCustomer(this.customer)
+        .subscribe(() => this.goBack());
+    }
   }
 
   goBack(): void {

@@ -41,8 +41,8 @@ export class CustomerService {
         this.log("addCustomer: customer is required");
         return;
       }
-      return this.http.post(url, customer, httpOptions).pipe(
-        catchError(this.handleError<Customer>('addCustomer'))
+      return this.http.post(this.customerUrl, customer, httpOptions).pipe(
+        catchError(this.handleError<any>('addCustomer'))
       );
   }
 
@@ -64,7 +64,7 @@ export class CustomerService {
     }
     const url = `${this.customerUrl}/${id}`;
     return this.http.delete(url, httpOptions).pipe(
-        catchError(this.handleError<Customer>('deleteCustomer'))
+        catchError(this.handleError<any>('deleteCustomer'))
     );
   }
 
