@@ -7,7 +7,7 @@ Sample project running Angular 7 with Node.js backend.
 ## Prerequisites
 
 * Install Node
-* Install CLI
+* Install Angular CLI
 * Run custAPI on 'http://localhost:3000'
 
 ## Development server
