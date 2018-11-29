@@ -43,13 +43,24 @@ export class CustomerDetailComponent implements OnInit {
         .subscribe(() => this.goBack());
     }
     else {
-      this.customerService.addCustomer(this.customer)
-        .subscribe(() => this.goBack());
+      this.customerService.addCustomer(this.customer).
+        subscribe( customer =>
+          this.addCustomerSubscriber(customer)
+        );
     }
+  }
+
+  addCustomerSubscriber(customer: Customer) {
+    this.customer = customer;
+    // this.goBack();
   }
 
   goBack(): void {
     this.location.back();
+  }
+
+  private log(message: string) {
+    this.messageService.addMessage(`customer-detail.component: ${message}`);
   }
 
 }

@@ -3,26 +3,44 @@
 
 const { SpecReporter } = require('jasmine-spec-reporter');
 
+const baseUrl = "http://localhost:4200";
+
 exports.config = {
-  allScriptsTimeout: 11000,
+
+  seleniumAddress: 'http://127.0.0.1:4444/wd/hub', // This is targetting your local running instance of the selenium webdriver
+  getPageTimeout: 60000,
+  allScriptsTimeout: 500000,
+
   specs: [
-    './src/**/*.e2e-spec.ts'
+    './features/**/*.feature'
   ],
   capabilities: {
     'browserName': 'chrome'
   },
   directConnect: true,
-  baseUrl: 'http://localhost:4200/',
-  framework: 'jasmine',
-  jasmineNodeOpts: {
-    showColors: true,
-    defaultTimeoutInterval: 30000,
-    print: function() {}
+  baseUrl: baseUrl,
+
+  framework: 'custom',
+  frameworkPath: require.resolve('protractor-cucumber-framework'),
+
+  cucumberOpts: {
+    require: ['./steps/**/*.ts'],
+    // <string[]> (expression) only execute the features or scenarios with tags matching the expression
+    'no-colors': true,
+    tags: [],
+    // <boolean> fail if there are any undefined or pending steps
+    strict: true,
+    // <string[]> (type[:path]) specify the output format, optionally supply PATH to redirect formatter output (repeatable)
+    plugin: ['pretty'],
+    // <boolean> invoke formatters without executing steps
+    dryRun: false,
+    // <string[]> ("extension:module") require files with the given EXTENSION after requiring MODULE (repeatable)
+    compiler: []
   },
   onPrepare() {
     require('ts-node').register({
-      project: require('path').join(__dirname, './tsconfig.e2e.json')
+      project: 'e2e/tsconfig.e2e.json'
     });
-    jasmine.getEnv().addReporter(new SpecReporter({ spec: { displayStacktrace: true } }));
+    return browser.driver.get(baseUrl);
   }
 };

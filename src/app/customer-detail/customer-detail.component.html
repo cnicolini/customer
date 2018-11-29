@@ -1,26 +1,27 @@
 <div *ngIf="customer" class="customer">
 
   <h2>{{customer.name | uppercase}} Details</h2>
-  <div><span>id: </span>{{customer._id}}</div>
+  <div *ngIf="customer._id"><span>id: </span>{{customer._id}}<br><br></div>
   <div>
     <label>Name:<br>
-      <input [(ngModel)]="customer.name" placeholder="name"/>
+      <input [(ngModel)]="customer.name" placeholder="name" id="name"/>
     </label>
   </div>
+  <br>
   <div>
     <label>Address:<br>
-      <input [(ngModel)]="customer.address" placeholder="address"/>
+      <input [(ngModel)]="customer.address" placeholder="address" id="address"/>
     </label>
   </div>
   <div>{{customer.dateCreated}}</div>
   <div>{{customer.status}}</div>
 
+  <input [(ngModel)]="customer._id" id="customer-id"/>
 </div>
-<br>
 <br>
 <table>
   <tr>
-    <td><button (click)="save()" *ngIf="customer">Save</button></td>
+    <td><button (click)="save()" *ngIf="customer" id="save">Save</button></td>
     <td>&nbsp;</td>
     <td><button (click)="goBack()">Back</button></td>
   </tr>

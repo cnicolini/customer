@@ -42,6 +42,10 @@ export class CustomerService {
         return;
       }
       return this.http.post(this.customerUrl, customer, httpOptions).pipe(
+        tap(c => {
+          var cust = c as Customer;
+          this.log(`Customer created ${cust._id}`);
+        }),
         catchError(this.handleError<any>('addCustomer'))
       );
   }
@@ -53,7 +57,8 @@ export class CustomerService {
     }
     const url = `${this.customerUrl}/${customer._id}`;
     return this.http.put(url, customer, httpOptions).pipe(
-        catchError(this.handleError<any>('updateCustomer'))
+      tap ( _ => this.log(`Customer updated`) ),
+      catchError(this.handleError<any>('updateCustomer'))
     );
   }
 
@@ -70,7 +75,7 @@ export class CustomerService {
 
   /** Log a HeroService message with the MessageService */
   private log(message: string) {
-    this.messageService.addMessage(`CustomerService: ${message}`);
+    this.messageService.setMessage(`CustomerService: ${message}`);
   }
 
   /**
