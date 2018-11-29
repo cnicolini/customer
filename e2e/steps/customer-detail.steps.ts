@@ -12,6 +12,8 @@ defineSupportCode(({Given, When, Then}) => {
 
   const page: CustomerDetailPage = new CustomerDetailPage();
 
+  var customerId: string;
+
   Then('I navigate to the details page', function () {
     return expect(page.getPageTitleText()).to.eventually.equal(page.title);
   });
@@ -34,6 +36,9 @@ defineSupportCode(({Given, When, Then}) => {
 
   When('I click the save button', function () {
     page.clickSaveButton();
+    page.getCustomerId().getAttribute('value').then( text => {
+      this.customerId = text;
+    })
   });
 
 });

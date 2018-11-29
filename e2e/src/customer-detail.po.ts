@@ -27,6 +27,10 @@ export class CustomerDetailPage {
     return element(by.id('address'));
   }
 
+  getCustomerId() {
+    return element(by.id('id'));
+  }
+
   setAddress(address: string) {
     this.getAddress().sendKeys(address);
   }

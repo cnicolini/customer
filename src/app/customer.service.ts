@@ -42,6 +42,10 @@ export class CustomerService {
         return;
       }
       return this.http.post(this.customerUrl, customer, httpOptions).pipe(
+        tap(c => {
+          var cust = c as Customer;
+          this.log(`Customer created ${cust._id}`);
+        }),
         catchError(this.handleError<any>('addCustomer'))
       );
   }
