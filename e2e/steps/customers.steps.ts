@@ -12,11 +12,6 @@ defineSupportCode(({Given, When, Then}) => {
 
   const page: CustomersPage = new CustomersPage();
 
-  When('I navigate to the customers page', () => {
-    page.navigateTo();
-    return expect(page.getPageTitleText()).to.eventually.equal(page.title);
-  });
-
   Given('I am in the customers page', () => {
     page.navigateTo();
     return expect(page.getPageTitleText()).to.eventually.equal(page.title);

@@ -3,7 +3,7 @@ Feature: customers page
   so that I can review, modify, and add new customers.
 
   Scenario: Access customers page
-    When I navigate to the customers page
+    Given I am in the customers page
     Then I should see a list of customers
 
   Scenario: User clicks the add button
