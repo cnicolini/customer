@@ -1,14 +1,14 @@
-<div *ngIf="customer">
+<div *ngIf="customer" class="customer">
 
   <h2>{{customer.name | uppercase}} Details</h2>
   <div><span>id: </span>{{customer._id}}</div>
   <div>
-    <label>Name:
+    <label>Name:<br>
       <input [(ngModel)]="customer.name" placeholder="name"/>
     </label>
   </div>
   <div>
-    <label>Address:
+    <label>Address:<br>
       <input [(ngModel)]="customer.address" placeholder="address"/>
     </label>
   </div>
