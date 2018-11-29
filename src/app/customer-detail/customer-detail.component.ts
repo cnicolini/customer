@@ -45,10 +45,14 @@ export class CustomerDetailComponent implements OnInit {
     else {
       this.customerService.addCustomer(this.customer).
         subscribe( customer =>
-          this.customer = customer;
-          this.goBack()
+          this.subscribeAddCustomer(customer)
         );
     }
+  }
+
+  subscribeAddCustomer(customer: Customer) {
+    this.customer = customer;
+    this.goBack()
   }
 
   goBack(): void {

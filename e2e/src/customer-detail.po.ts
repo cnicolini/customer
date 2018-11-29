@@ -28,7 +28,7 @@ export class CustomerDetailPage {
   }
 
   getCustomerId() {
-    return element(by.id('id'));
+    return element(by.id('_id'));
   }
 
   setAddress(address: string) {
