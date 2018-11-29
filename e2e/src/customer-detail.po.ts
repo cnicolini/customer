@@ -19,11 +19,20 @@ export class CustomerDetailPage {
     return element(by.id('name'));
   }
 
+  setName(name: string) {
+      this.getName().sendKeys(name);
+  }
+
   getAddress() {
     return element(by.id('address'));
   }
 
-  clickAddButton() {
-    element(by.id('add')).click();
+  setAddress(address: string) {
+    this.getAddress().sendKeys(address);
   }
+
+  clickSaveButton() {
+    element(by.id('save')).click();
+  }
+
 }

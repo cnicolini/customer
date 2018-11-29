@@ -17,17 +17,25 @@ defineSupportCode(({Given, When, Then}) => {
     return expect(page.getPageTitleText()).to.eventually.equal(page.title);
   });
 
+  Given('I am in the customers page', () => {
+    page.navigateTo();
+    return expect(page.getPageTitleText()).to.eventually.equal(page.title);
+  });
+
   Then('I should see a list of customers', () => {
     // return expect(page.getCustomerList()).to.eventually.have.lengthOf(4);
     return expect(page.getCustomerList().count()).to.eventually.be.above(0);
   });
 
-  Given('I am in the customers page', function () {
-    return expect(page.getPageTitleText()).to.eventually.equal("Customers");
-  });
-
   When('I click on the add button', function () {
     page.clickAddButton();
+  });
+
+  Then('I am redirected back to the customers page', function() {
+    return expect(page.getPageTitleText()).to.eventually.equal(page.title);
+  });
+
+  Then('the new customer is visualized in the list of customers', function () {
   });
 
 });

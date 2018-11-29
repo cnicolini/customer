@@ -10,18 +10,30 @@ defineSupportCode(({Given, When, Then}) => {
 
   var expect = chai.expect;
 
-  const detailPage: CustomerDetailPage = new CustomerDetailPage();
+  const page: CustomerDetailPage = new CustomerDetailPage();
 
   Then('I navigate to the details page', function () {
-    return expect(detailPage.getPageTitleText()).to.eventually.equal(detailPage.title);
+    return expect(page.getPageTitleText()).to.eventually.equal(page.title);
   });
 
   Then('the field name is empty', function () {
-    return expect(detailPage.getName().getAttribute('value')).to.eventually.equal('');
+    return expect(page.getName().getAttribute('value')).to.eventually.equal('');
   });
 
   Then('the field address is empty', function () {
-    return expect(detailPage.getAddress().getAttribute('value')).to.eventually.equal('');
+    return expect(page.getAddress().getAttribute('value')).to.eventually.equal('');
+  });
+
+  Given('I enter {string} as the name', function (name) {
+    page.setName(name);
+  });
+
+  Given('I enter {string} as the address', function (address) {
+    page.setAddress(address);
+  });
+
+  When('I click the save button', function () {
+    page.clickSaveButton();
   });
 
 });

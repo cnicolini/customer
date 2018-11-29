@@ -15,12 +15,13 @@
   <div>{{customer.dateCreated}}</div>
   <div>{{customer.status}}</div>
 
+  <input type="hidden" [(ngModel)]="customer._id" id="_id"/>
 </div>
 <br>
 <br>
 <table>
   <tr>
-    <td><button (click)="save()" *ngIf="customer">Save</button></td>
+    <td><button (click)="save()" *ngIf="customer" id="save">Save</button></td>
     <td>&nbsp;</td>
     <td><button (click)="goBack()">Back</button></td>
   </tr>

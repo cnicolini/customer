@@ -12,3 +12,12 @@ Feature: customers page
     Then I navigate to the details page
     And the field name is empty
     And the field address is empty
+
+  Scenario: User enters a new customer
+    Given I am in the customers page
+    And I click on the add button
+    And I enter "Darth Vader" as the name
+    And I enter "263 Great Valley Parkway, Malvern PA 19355, USA" as the address
+    When I click the save button
+    Then I am redirected back to the customers page
+    And the new customer is visualized in the list of customers
