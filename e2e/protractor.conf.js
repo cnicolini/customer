@@ -14,9 +14,25 @@ exports.config = {
   specs: [
     './features/**/*.feature'
   ],
-  capabilities: {
-    'browserName': 'chrome'
-  },
+  multiCapabilities: [{
+    browserName: 'chrome',
+    shardTestFiles: true,
+    maxInstances: 2,
+    chromeOptions: {
+        args: ['disable-infobars']
+    }
+  }],
+
+  plugins: [{
+    package: 'protractor-multiple-cucumber-html-reporter-plugin',
+    options:{
+      // read the options part for more options
+      automaticallyGenerateReport: true,
+      removeExistingJsonReportFile: true,
+      openReportInBrowser: true
+    }
+  }],
+
   directConnect: true,
   baseUrl: baseUrl,
 
@@ -24,9 +40,9 @@ exports.config = {
   frameworkPath: require.resolve('protractor-cucumber-framework'),
 
   cucumberOpts: {
-    require: ['./steps/**/*.ts'],
+    require: ['./steps/**/*.steps.ts'],
     // <string[]> (expression) only execute the features or scenarios with tags matching the expression
-    'no-colors': true,
+    // 'no-colors': false,
     tags: [],
     // <boolean> fail if there are any undefined or pending steps
     strict: true,
@@ -35,7 +51,10 @@ exports.config = {
     // <boolean> invoke formatters without executing steps
     dryRun: false,
     // <string[]> ("extension:module") require files with the given EXTENSION after requiring MODULE (repeatable)
-    compiler: []
+    compiler: [],
+    // Tell CucumberJS to save the JSON report
+    format: 'json:.e2e-report/results.json',
+    strict: true
   },
   onPrepare() {
     require('ts-node').register({
