@@ -8,7 +8,7 @@ export class CustomerDetailPage {
 
   navigateTo(id: string) {
     this.id = id;
-    return browser.get(`http://localhost:4200/customer/${this.id}`);
+    return browser.get(`/customer/${this.id}`);
   }
 
   getPageTitleText() {

@@ -5,7 +5,7 @@ export class CustomersPage {
   public title = 'Customers';
 
   navigateTo() {
-    return browser.get('http://localhost:4200/customer');
+    return browser.get('/customer');
   }
 
   getPageTitleText() {
