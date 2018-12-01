@@ -40,7 +40,10 @@ exports.config = {
   frameworkPath: require.resolve('protractor-cucumber-framework'),
 
   cucumberOpts: {
-    require: ['./steps/**/*.steps.ts'],
+    require: [
+      './steps/**/*.steps.ts',
+      './utilities/hooks.js'
+    ],
     // <string[]> (expression) only execute the features or scenarios with tags matching the expression
     // 'no-colors': false,
     tags: [],
