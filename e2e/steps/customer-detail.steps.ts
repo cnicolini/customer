@@ -2,15 +2,13 @@ import { Given, When, Then } from 'cucumber';
 
 import { CustomerDetailPage } from '../src/customer-detail.po';
 
-var chai = require('chai');
-var chaiAsPromised = require('chai-as-promised');
+const chai = require('chai');
+const chaiAsPromised = require('chai-as-promised');
 chai.use(chaiAsPromised);
 
-var expect = chai.expect;
+const expect = chai.expect;
 
 const page: CustomerDetailPage = new CustomerDetailPage();
-
-var customerId: string;
 
 Then('I navigate to the details page', function() {
   return expect(page.getPageTitleText()).to.eventually.match(/Details$/);

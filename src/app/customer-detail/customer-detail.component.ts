@@ -22,7 +22,7 @@ export class CustomerDetailComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.getCustomer()
+    this.getCustomer();
   }
 
   getCustomer(): void {
@@ -30,8 +30,7 @@ export class CustomerDetailComponent implements OnInit {
 
     if (id === 'add') {
       this.customer = new Customer();
-    }
-    else {
+    } else {
       this.customerService.getCustomer(id)
         .subscribe(customer => this.customer = customer);
     }
@@ -41,8 +40,7 @@ export class CustomerDetailComponent implements OnInit {
     if (this.customer._id) {
       this.customerService.updateCustomer(this.customer)
         .subscribe(() => this.goBack());
-    }
-    else {
+    } else {
       this.customerService.addCustomer(this.customer).
         subscribe( customer =>
           this.addCustomerSubscriber(customer)

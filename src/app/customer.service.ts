@@ -16,7 +16,7 @@ const httpOptions = {
 })
 export class CustomerService {
 
-  private customerUrl = "http://localhost:3000/customer";
+  private customerUrl = 'http://localhost:3000/customer';
 
   constructor(private http: HttpClient,
     private messageService: MessageService) { }
@@ -38,12 +38,12 @@ export class CustomerService {
 
   addCustomer(customer: Customer): Observable<Customer> {
       if (!customer) {
-        this.log("addCustomer: customer is required");
+        this.log('addCustomer: customer is required');
         return;
       }
       return this.http.post(this.customerUrl, customer, httpOptions).pipe(
         tap(c => {
-          var cust = c as Customer;
+          const cust = c as Customer;
           this.log(`Customer created ${cust._id}`);
         }),
         catchError(this.handleError<any>('addCustomer'))
@@ -52,7 +52,7 @@ export class CustomerService {
 
   updateCustomer(customer: Customer): Observable<any> {
     if (!customer) {
-      this.log("updateCustomer: customer is required");
+      this.log('updateCustomer: customer is required');
       return;
     }
     const url = `${this.customerUrl}/${customer._id}`;
@@ -64,7 +64,7 @@ export class CustomerService {
 
   deleteCustomer(id: string): Observable<Customer> {
     if (!id) {
-      this.log("deleteCustomer: id is required");
+      this.log('deleteCustomer: id is required');
       return;
     }
     const url = `${this.customerUrl}/${id}`;
