@@ -16,14 +16,12 @@ const httpOptions = {
 })
 export class CustomerService {
 
-  private customerUrl = 'http://localhost:3000/customer';
+  customerUrl = 'http://localhost:3000/customer';
 
   constructor(private http: HttpClient,
     private messageService: MessageService) { }
 
   getCustomers(): Observable<Customer[]> {
-    // this.messageService.addMessage("Customers retrieved");
-    // return of(CUSTOMERS);
     return this.http.get<Customer[]>(this.customerUrl, {responseType: 'json'}).pipe(
         catchError(this.handleError('getCustomers', []))
     );
