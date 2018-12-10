@@ -2,3 +2,5 @@
 <h1>{{ title }}</h1>
 <router-outlet></router-outlet>
 <app-messages></app-messages>
+<h3 *ngIf="production">Prod</h3>
+<h3 *ngIf="!production">Dev</h3>
