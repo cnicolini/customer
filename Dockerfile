@@ -1,11 +1,3 @@
-#FROM nginx:alpine
-
-#COPY nginx/nginx.conf /etc/nginx/nginx.conf
-
-#WORKDIR /usr/share/nginx/html
-
-#COPY dist/ .
-
 ### STAGE 1: Build ###
 
 # We label our stage as 'builder'
@@ -28,11 +20,10 @@ RUN $(npm bin)/ng build --prod --build-optimizer
 
 ### STAGE 2: Setup ###
 
-#FROM nginx:alpine
-FROM centos/nginx-18-centos7
+FROM nginx:1.13.3-alpine
 
 ## Copy our default nginx config
-COPY nginx/nginx.conf /etc/nginx/conf.d/
+COPY nginx/default.conf /etc/nginx/conf.d/
 
 ## Remove default nginx website
 RUN rm -rf /usr/share/nginx/html/*
